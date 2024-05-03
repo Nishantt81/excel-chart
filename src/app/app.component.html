@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="box">
+    <button (click) ="triggerFileInput()">Upload File</button>
+    <input type="file" #fileInput style="display: none;" (change)="handleFileInput($event)">
+  </div>
+</div>
+
+<div class="mapping-dialog" *ngIf="excelData">
+  <h2>Column Mapping</h2>
+  <div class="column-list">
+    <div *ngFor="let mappingItem of mappingItems">
+      <label>{{ mappingItem.predefinedcolumnName }}</label>
+      <select [(ngModel)]="mapping[mappingItem.predefinedcolumnName]">
+        <option *ngFor="let column of excelcolumnNames" [value]="column">{{ column }}</option>
+      </select>
+    </div>
+  </div>
+  <button (click)="confirmMapping(mapping)">Confirm Mapping</button>
+</div>
+
+<canvas #barChartCanvas width="400" height="400"></canvas>
